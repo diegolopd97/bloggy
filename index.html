@@ -5,7 +5,7 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@200;300&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href=".\styles\main.css">
+    <link rel="stylesheet" href="./styles/main.css">
     <script>
         // Function to handle page link click
         function changeContent(pageNumber) {
@@ -27,7 +27,7 @@
             paginationElement.innerHTML = '';
 
             // Fetch the file names from the 'pages' directory
-            fetch(`.\\pages\\`)
+            fetch('.\\pages\\')
                 .then(response => response.text())
                 .then(text => {
                     // Extract the file names from the response
@@ -61,7 +61,7 @@
     <div class="container">
         <div class="header">
             <div class="logo">
-                <img src=".\assets\logo.png" alt="Logo">
+                <img src="./assets/logo.png" alt="Logo">
             </div>
             <div class="navigation">
                 <ul>
