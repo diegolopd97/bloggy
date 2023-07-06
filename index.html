@@ -27,7 +27,7 @@
             paginationElement.innerHTML = '';
 
             // Fetch the file names from the 'pages' directory
-            fetch(`.\pages\`)
+            fetch(`.\\pages\\`)
                 .then(response => response.text())
                 .then(text => {
                     // Extract the file names from the response
