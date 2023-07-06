@@ -18,6 +18,43 @@
                 })
                 .catch(error => console.log('Error:', error));
         }
+
+        // Function to load the page links dynamically
+        function loadPageLinks() {
+            const paginationElement = document.getElementById('pagination');
+
+            // Clear existing page links
+            paginationElement.innerHTML = '';
+
+            // Fetch the file names from the 'pages' directory
+            fetch(`.\pages\`)
+                .then(response => response.text())
+                .then(text => {
+                    // Extract the file names from the response
+                    const fileNames = text.split('\n').filter(fileName => fileName.trim() !== '');
+
+                    // Calculate the number of pages
+                    const numPages = fileNames.length;
+
+                    // Create page links dynamically
+                    for (let i = 1; i <= numPages; i++) {
+                        const pageLink = document.createElement('a');
+                        pageLink.classList.add('page-link');
+                        pageLink.href = '#';
+                        pageLink.textContent = i;
+                        pageLink.onclick = function() {
+                            changeContent(i);
+                        };
+                        paginationElement.appendChild(pageLink);
+                    }
+                })
+                .catch(error => console.log('Error:', error));
+        }
+
+        // Load the initial page links
+        window.onload = function() {
+            loadPageLinks();
+        };
     </script>
 </head>
 <body>
@@ -35,11 +72,7 @@
                 </ul>
             </div>
         </div>
-        <div class="pagination">
-            <a class="page-link" href="#" onclick="changeContent(1)">1</a>
-            <a class="page-link" href="#" onclick="changeContent(2)">2</a>
-            <a class="page-link" href="#" onclick="changeContent(3)">3</a>
-        </div>
+        <div id="pagination" class="pagination"></div>
         <div class="content">
             <p id="content">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam dapibus eros vel metus cursus condimentum. Donec ut erat tristique, fermentum est sit amet, ullamcorper nisl. Nullam rutrum dolor mauris, id tincidunt elit fringilla eget.Sed pharetra purus nec libero porta, sit amet viverra enim vulputate.</p>
         </div>
