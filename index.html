@@ -28,7 +28,10 @@
 
             // Fetch the file names from the 'pages' directory
             fetch('.\\pages\\')
-                .then(response => response.text())
+                .then(response => {
+                    console.log(response.text())
+                    return response.text();
+                })
                 .then(text => {
                     // Extract the file names from the response
                     const fileNames = text.split('\n').filter(fileName => fileName.trim() !== '');
