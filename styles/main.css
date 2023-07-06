@@ -35,16 +35,19 @@ body {
      color: #333;
      font-weight: bold;
 }
- .content {
-     text-align: justify;
-     max-width: 800px;
-     padding: 20px;
-     border: 1px solid #ccc;
-     margin-top: 20px;
-    /* Adjust the margin here */
-     width: 100%;
-    /* Add width to make content responsive */
+.content {
+  text-align: justify;
+  max-width: 800px;
+  padding: 20px;
+  border: 1px solid #ccc;
+  margin-top: 20px;
+  width: 100%;
 }
+
+.content p {
+  text-align: justify;
+}
+
  .pagination {
      display: flex;
      justify-content: center;
