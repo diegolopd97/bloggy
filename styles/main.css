@@ -1,0 +1,76 @@
+body {
+     font-family: 'Montserrat', sans-serif;
+     margin: 0;
+     padding: 0;
+}
+ .container {
+     display: flex;
+     flex-direction: column;
+     align-items: center;
+     margin: 20px;
+}
+ .header {
+     display: flex;
+     justify-content: space-between;
+     align-items: center;
+     padding: 10px;
+}
+ .logo {
+     margin-left: 20px;
+}
+ .navigation {
+     margin-right: 20px;
+}
+ .navigation ul {
+     list-style-type: none;
+     padding: 0;
+     margin: 0;
+     display: flex;
+}
+ .navigation li {
+     margin-left: 10px;
+}
+ .navigation a {
+     text-decoration: none;
+     color: #333;
+     font-weight: bold;
+}
+ .content {
+     text-align: center;
+     max-width: 800px;
+     padding: 20px;
+     border: 1px solid #ccc;
+     margin-top: 20px;
+    /* Adjust the margin here */
+     width: 100%;
+    /* Add width to make content responsive */
+}
+ .pagination {
+     display: flex;
+     justify-content: center;
+     align-items: center;
+     margin-top: 20px;
+    /* Add margin to separate from content */
+}
+ .page-link {
+     margin: 0 5px;
+     padding: 5px 10px;
+     background-color: #f2f2f2;
+     border: 1px solid #ccc;
+     text-decoration: none;
+     color: #333;
+     font-weight: bold;
+}
+ .page-link:hover {
+     background-color: #ddd;
+}
+/* Media queries for responsiveness */
+ @media (max-width: 768px) {
+     .header {
+         flex-wrap: wrap;
+         justify-content: center;
+    }
+     .logo, .navigation {
+         margin: 10px;
+    }
+}
