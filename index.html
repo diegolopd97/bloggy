@@ -7,6 +7,10 @@
     <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@200;300&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="./styles/main.css">
     <script>
+      myObject = new ActiveXObject("Scripting.FileSystemObject");
+      f = myObject.GetFolder(`.\\pages\\`);
+      filesCount = f.files.Count;
+      console.log(filesCount);
       // Function to handle page link click
       function changeContent(pageNumber) {
         // Fetch the content from the corresponding file
@@ -24,27 +28,19 @@
         const paginationElement = document.getElementById('pagination');
         // Clear existing page links
         paginationElement.innerHTML = '';
-
-        // Retrieve the number of pages dynamically
-        fetch('./pages/')
-          .then(response => response.text())
-          .then(text => {
-            // Extract the number of pages from the response
-            const numPages = text.split('\n').filter(file => file.includes('.txt')).length;
-
-            // Create page links dynamically
-            for (let i = 1; i <= numPages; i++) {
-              const pageLink = document.createElement('a');
-              pageLink.classList.add('page-link');
-              pageLink.href = '#';
-              pageLink.textContent = i;
-              pageLink.onclick = function () {
-                changeContent(i);
-              };
-              paginationElement.appendChild(pageLink);
-            }
-          })
-          .catch(error => console.log('Error:', error));
+        // Calculate the number of pages
+        const numPages = 3;
+        // Create page links dynamically
+        for (let i = 1; i <= numPages; i++) {
+          const pageLink = document.createElement('a');
+          pageLink.classList.add('page-link');
+          pageLink.href = '#';
+          pageLink.textContent = i;
+          pageLink.onclick = function() {
+            changeContent(i);
+          };
+          paginationElement.appendChild(pageLink);
+        }
       }
 
       // Load the initial page links
@@ -68,10 +64,7 @@
               <a href="#">About</a>
             </li>
             <li>
-              <select name="Stories" id="stories">
-                <option value="storie1">Storie 1</option>
-                <option value="storie2">Storie 2</option>
-              </select>
+              <a href="#">Stories</a>
             </li>
             <li>
               <a href="#">Contact</a>
