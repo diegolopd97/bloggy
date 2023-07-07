@@ -7,10 +7,20 @@
     <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@200;300&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="./styles/main.css">
     <script>
-      myObject = new ActiveXObject("Scripting.FileSystemObject");
-      f = myObject.GetFolder(`.\\pages\\`);
-      filesCount = f.files.Count;
-      console.log(filesCount);
+      function getNumCaps() {
+        flag = 0;
+        numCaps = 1;
+        while (flag != 1) {
+          fetch(`.\\pages\\cap${numCaps}.txt`)
+            .then(response => numCaps++)
+            .catch(error => {
+              flag = 1;
+              console.log('No more caps:', error)
+          });
+        }
+        return numCaps;
+      }
+
       // Function to handle page link click
       function changeContent(pageNumber) {
         // Fetch the content from the corresponding file
@@ -29,7 +39,7 @@
         // Clear existing page links
         paginationElement.innerHTML = '';
         // Calculate the number of pages
-        const numPages = 3;
+        const numPages = getNumCaps();
         // Create page links dynamically
         for (let i = 1; i <= numPages; i++) {
           const pageLink = document.createElement('a');
