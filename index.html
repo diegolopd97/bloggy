@@ -42,6 +42,7 @@
 
       // Load the initial page links
       window.onload = function () {
+        document.getElementById('nextButton').setAttribute('data-page', 2)
         document.getElementById('searchButton').addEventListener('click', searchPage);
         document.getElementById('nextButton').addEventListener('click', loadNextPage);
       };
@@ -56,28 +57,25 @@
         <div class="navigation">
           <ul>
             <li>
-              <a href="#">Home</a>
+              <a href="#">Inicio</a>
             </li>
             <li>
-              <a href="#">About</a>
+              <a href="#">Historia 1</a>
             </li>
             <li>
-              <a href="#">Stories</a>
-            </li>
-            <li>
-              <a href="#">Contact</a>
+              <a href="#">Sobre mí</a>
             </li>
           </ul>
         </div>
       </div>
       <div class="search-container">
-        <input id="pageInput" type="text" placeholder="Enter page number">
-        <button id="searchButton">Search</button>
+        <input id="pageInput" type="text" placeholder="Introduce un capítulo">
+        <button id="searchButton">Buscar</button>
       </div>
       <div class="content">
         <p id="content">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam dapibus eros vel metus cursus condimentum. Donec ut erat tristique, fermentum est sit amet, ullamcorper nisl. Nullam rutrum dolor mauris, id tincidunt elit fringilla eget.Sed pharetra purus nec libero porta, sit amet viverra enim vulputate.</p>
         <p id="error" style="color: red; display: none;"></p>
-        <button id="nextButton" style="display: none;">Next Page</button>
+        <button id="nextButton" style="display: none;">Siguiente</button>
       </div>
     </div>
   </body>
