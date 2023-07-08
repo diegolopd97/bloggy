@@ -7,41 +7,43 @@
     <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@200;300&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="./styles/main.css">
     <script>
-      // Function to handle page link click
-      function changeContent(pageNumber) {
-        // Fetch the content from the corresponding file
-        fetch(`.\\pages\\cap${pageNumber}.txt`)
-          .then(response => response.text())
-          .then(text => {
-            // Update the content element with the fetched text
-            document.getElementById('content').innerText = text;
-          })
-          .catch(error => console.log('Error:', error));
+      // Function to handle page search
+      function searchPage() {
+        const pageNumber = parseInt(document.getElementById('pageInput').value);
+        if (!isNaN(pageNumber)) {
+          fetch(`./pages/cap${pageNumber}.txt`)
+            .then(response => {
+              if (response.ok) {
+                return response.text();
+              } else {
+                throw new Error('Chapter doesn\'t exist');
+              }
+            })
+            .then(text => {
+              document.getElementById('content').innerText = text;
+              document.getElementById('error').style.display = 'none';
+              document.getElementById('nextButton').style.display = 'inline-block';
+              document.getElementById('nextButton').setAttribute('data-page', pageNumber + 1);
+            })
+            .catch(error => {
+              document.getElementById('content').innerText = '';
+              document.getElementById('error').innerText = error.message;
+              document.getElementById('error').style.display = 'block';
+              document.getElementById('nextButton').style.display = 'none';
+            });
+        }
       }
 
-      // Function to load the page links dynamically
-      function loadPageLinks() {
-        const paginationElement = document.getElementById('pagination');
-        // Clear existing page links
-        paginationElement.innerHTML = '';
-        // Calculate the number of pages
-        const numPages = 4;
-        // Create page links dynamically
-        for (let i = 1; i <= numPages; i++) {
-          const pageLink = document.createElement('a');
-          pageLink.classList.add('page-link');
-          pageLink.href = '#';
-          pageLink.textContent = i;
-          pageLink.onclick = function() {
-            changeContent(i);
-          };
-          paginationElement.appendChild(pageLink);
-        }
+      // Function to load the next page
+      function loadNextPage() {
+        const nextPage = parseInt(document.getElementById('nextButton').getAttribute('data-page'));
+        searchPage(nextPage);
       }
 
       // Load the initial page links
       window.onload = function () {
-        loadPageLinks();
+        document.getElementById('searchButton').addEventListener('click', searchPage);
+        document.getElementById('nextButton').addEventListener('click', loadNextPage);
       };
     </script>
   </head>
@@ -68,9 +70,14 @@
           </ul>
         </div>
       </div>
-      <div id="pagination" class="pagination"></div>
+      <div class="search-container">
+        <input id="pageInput" type="text" placeholder="Enter page number">
+        <button id="searchButton">Search</button>
+      </div>
       <div class="content">
         <p id="content">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam dapibus eros vel metus cursus condimentum. Donec ut erat tristique, fermentum est sit amet, ullamcorper nisl. Nullam rutrum dolor mauris, id tincidunt elit fringilla eget.Sed pharetra purus nec libero porta, sit amet viverra enim vulputate.</p>
+        <p id="error" style="color: red; display: none;"></p>
+        <button id="nextButton" style="display: none;">Next Page</button>
       </div>
     </div>
   </body>

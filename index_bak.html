@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@200;300&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="./styles/main.css">
+    <script>
+      // Function to handle page link click
+      function changeContent(pageNumber) {
+        // Fetch the content from the corresponding file
+        fetch(`.\\pages\\cap${pageNumber}.txt`)
+          .then(response => response.text())
+          .then(text => {
+            // Update the content element with the fetched text
+            document.getElementById('content').innerText = text;
+          })
+          .catch(error => console.log('Error:', error));
+      }
+
+      // Function to load the page links dynamically
+      function loadPageLinks() {
+        const paginationElement = document.getElementById('pagination');
+        // Clear existing page links
+        paginationElement.innerHTML = '';
+        // Calculate the number of pages
+        const numPages = 4;
+        // Create page links dynamically
+        for (let i = 1; i <= numPages; i++) {
+          const pageLink = document.createElement('a');
+          pageLink.classList.add('page-link');
+          pageLink.href = '#';
+          pageLink.textContent = i;
+          pageLink.onclick = function() {
+            changeContent(i);
+          };
+          paginationElement.appendChild(pageLink);
+        }
+      }
+
+      // Load the initial page links
+      window.onload = function () {
+        loadPageLinks();
+      };
+    </script>
+  </head>
+  <body>
+    <div class="container">
+      <div class="header">
+        <div class="logo">
+          <img src="./assets/logo.png" alt="Logo">
+        </div>
+        <div class="navigation">
+          <ul>
+            <li>
+              <a href="#">Home</a>
+            </li>
+            <li>
+              <a href="#">About</a>
+            </li>
+            <li>
+              <a href="#">Stories</a>
+            </li>
+            <li>
+              <a href="#">Contact</a>
+            </li>
+          </ul>
+        </div>
+      </div>
+      <div id="pagination" class="pagination"></div>
+      <div class="content">
+        <p id="content">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam dapibus eros vel metus cursus condimentum. Donec ut erat tristique, fermentum est sit amet, ullamcorper nisl. Nullam rutrum dolor mauris, id tincidunt elit fringilla eget.Sed pharetra purus nec libero porta, sit amet viverra enim vulputate.</p>
+      </div>
+    </div>
+  </body>
+</html>
