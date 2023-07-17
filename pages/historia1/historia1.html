@@ -60,7 +60,7 @@
                         return response.text();
                      })
                      .then(function(text) {
-                        contentParagraph.textContent = text;
+                        contentParagraph.innerHTML = text;
                      })
                      .catch(function(error) {
                         console.log('Error fetching file:', error);
